@@ -130,6 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: a11afc1da3edc43bc8df2febc71f3915, type: 2}
     m_RemovedComponents:
     - {fileID: 2924840857247202246, guid: e854dabe9d5344c10ba6d6793197a2f3, type: 3}
+    - {fileID: 6171748560921405490, guid: e854dabe9d5344c10ba6d6793197a2f3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -149,7 +150,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5865864637644309269}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
