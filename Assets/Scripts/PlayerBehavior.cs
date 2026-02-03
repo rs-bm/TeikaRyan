@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerBehavior : MonoBehaviour
 {
     public float speed; // amt of pixels moved per frame
-    public GameObject treat;
     private GameObject currentTreat;
     public float yOff = -1f;
+    public GameObject[] treats;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +25,8 @@ public class PlayerBehavior : MonoBehaviour
             currentTreat.transform.position = playerPos + treatPos;
         } else
         {
-            currentTreat = Instantiate(treat, new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
+            int result = Random.Range(0, treats.Length / 2);
+            currentTreat = Instantiate(treats[result], new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
         }
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame) {
