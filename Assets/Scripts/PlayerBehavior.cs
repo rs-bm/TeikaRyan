@@ -7,6 +7,8 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject currentTreat;
     public float yOff = -1f;
     public GameObject[] treats;
+    public float xMax;
+    public float xMin;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,21 +42,14 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         Keyboard k = Keyboard.current;
-        if (k.leftArrowKey.isPressed || k.aKey.isPressed) {
+        if (transform.position.x > xMin && k.leftArrowKey.isPressed || k.aKey.isPressed) {
             Vector3 newPos = transform.position;
             newPos.x = newPos.x - speed;
             transform.position = newPos;
-        } else if (k.rightArrowKey.isPressed || k.dKey.isPressed) {
+        } 
+        if (transform.position.x < xMax && k.rightArrowKey.isPressed || k.dKey.isPressed) {
             Vector3 newPos = transform.position;
             newPos.x = newPos.x + speed;
-            transform.position = newPos;
-        } if (k.upArrowKey.isPressed || k.wKey.isPressed) {
-            Vector3 newPos = transform.position;
-            newPos.y = newPos.y + speed;
-            transform.position = newPos;
-        } else if (k.downArrowKey.isPressed || k.sKey.isPressed) {
-            Vector3 newPos = transform.position;
-            newPos.y = newPos.y - speed;
             transform.position = newPos;
         }
     }
