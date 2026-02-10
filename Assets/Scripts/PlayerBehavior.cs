@@ -7,14 +7,13 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject currentTreat;
     public float yOff = -1f;
     public GameObject[] treats;
-    public float xMax;
-    public float xMin;
-
+    public int move;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        float currentTime = Time.time;
-        print(currentTime);
+        // float currentTime = Time.time;
+        // print(currentTime);
+        move = 0;
     }
 
     // Update is called once per frame
@@ -40,17 +39,41 @@ public class PlayerBehavior : MonoBehaviour
             col.enabled = true;
             currentTreat = null;
         }
-
         Keyboard k = Keyboard.current;
-        if (transform.position.x > xMin && k.leftArrowKey.isPressed || k.aKey.isPressed) {
+        bool left = (k.leftArrowKey.isPressed || k.aKey.isPressed) && move != 1;
+        bool right = (k.rightArrowKey.isPressed || k.dKey.isPressed) && move != 2;
+        if (left) {
             Vector3 newPos = transform.position;
             newPos.x = newPos.x - speed;
             transform.position = newPos;
         } 
-        if (transform.position.x < xMax && k.rightArrowKey.isPressed || k.dKey.isPressed) {
+        if (right) {
             Vector3 newPos = transform.position;
             newPos.x = newPos.x + speed;
             transform.position = newPos;
         }
+    }
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        print("you touched " + (other.gameObject.name));
+        if (other.gameObject.CompareTag("RB"));
+        {
+            move = 2; // Cannot move right
+        }
+        if (other.gameObject.CompareTag("LB"))
+        {
+            move = 1; // Cannot move left
+        } 
+    }
+
+    public void OnCollisionStay2D(Collision2D other)
+    {
+        print("you are touching " + other.gameObject.name);
+    }
+
+    public void OnCollisionExit2D(Collision2D other)
+    {
+        print("you stopped touching " + other.gameObject.name);
+        move = 0;
     }
 }

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1227580472908211624}
   - component: {fileID: 7774448423629164180}
   - component: {fileID: 6171748560921405490}
+  - component: {fileID: 281325269673901697}
   m_Layer: 0
   m_Name: Choc
-  m_TagString: Untagged
+  m_TagString: Treat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,3 +157,17 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.45
+--- !u!114 &281325269673901697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302306314995966198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84889fc288ded4bd5990e6c0da1a90c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreatBehavior
+  timeout: 1
+  timeStart: 0
