@@ -8,16 +8,22 @@ public class PlayerBehavior : MonoBehaviour
     public float yOff = -1f;
     public GameObject[] treats;
     public int move;
+    private float timeStart;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // float currentTime = Time.time;
         // print(currentTime);
         move = 0;
+        timeStart = 0.0f;
     }
 
     // Update is called once per frame
     void Update() {
+        
+        float currentTime = Time.time;
+
         if (currentTreat != null) {
             // current player position
             // gameObject is the owner of this script
@@ -28,9 +34,13 @@ public class PlayerBehavior : MonoBehaviour
         {
             int result = Random.Range(0, treats.Length / 2);
             currentTreat = Instantiate(treats[result], new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
+            float randomScale = UnityEngine.Random.Range(0.5f, 1.5f);
+            currentTreat.transform.localScale = new Vector3(randomScale, randomScale, 1);
         }
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) {
+        if (currentTime - timeStart > 0.25 && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            timeStart = Time.time;
             // give treat gravity and enable collider
             Rigidbody2D body = currentTreat.GetComponent<Rigidbody2D>();
             body.gravityScale = 1.0f;
@@ -39,6 +49,7 @@ public class PlayerBehavior : MonoBehaviour
             col.enabled = true;
             currentTreat = null;
         }
+
         Keyboard k = Keyboard.current;
         bool left = (k.leftArrowKey.isPressed || k.aKey.isPressed) && move != 1;
         bool right = (k.rightArrowKey.isPressed || k.dKey.isPressed) && move != 2;
