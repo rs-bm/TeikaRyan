@@ -169,5 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84889fc288ded4bd5990e6c0da1a90c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreatBehavior
-  timeout: 1
-  timeStart: 0
+  treats: []
+  treatType: 0

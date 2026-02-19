@@ -31,9 +31,7 @@ public class BorderBehavior : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Treat"))
         {
-            float currentTime = Time.time;
-        float timeThusFar = currentTime - timeStart;
-        if (timeThusFar > timeout)
+        if (Time.time - timeStart > timeout)
         {
             gameOver.SetActive(true);
             Destroy(player);
@@ -42,9 +40,5 @@ public class BorderBehavior : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Treat"))
-        {
-            timeStart = 0.0f;
-        }
     }
 }
