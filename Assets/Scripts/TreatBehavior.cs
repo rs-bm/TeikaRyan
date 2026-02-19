@@ -27,10 +27,12 @@ public class TreatBehavior : MonoBehaviour
                 GameObject currentTreat = Instantiate(treats[choice], Vector3.Lerp(gameObject.transform.position, other.gameObject.transform.position, 0.5f), Quaternion.identity);
                 currentTreat.GetComponent<Collider2D>().enabled = true;
                 currentTreat.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
-
+                // sound is cut off by Destroy(gameObject)
+                GetComponent<AudioSource>().Play();
                 Destroy(other.gameObject);
                 Destroy(gameObject);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>().updateScore(treatType);
+            
             }
         }
     }

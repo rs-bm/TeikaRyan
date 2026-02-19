@@ -52,7 +52,7 @@ public class PlayerBehavior : MonoBehaviour
             print("Current: " + currentTreatType + " Next: " + nextTreatType);
             currentTreat = Instantiate(treats[currentTreatType], new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
             currentTreat.transform.localScale = new Vector3(currentTreatScale, currentTreatScale, 1);
-            nextTreat = Instantiate(treats[nextTreatType], new Vector3(7.5f, 0.75f, 0.0f), Quaternion.identity);
+            nextTreat = Instantiate(treats[nextTreatType], new Vector3(6.5f, 1.5f, 0.0f), Quaternion.identity);
             nextTreat.transform.localScale = new Vector3(nextTreatScale, nextTreatScale, 1);
         }
 
