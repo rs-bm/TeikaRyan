@@ -30,9 +30,11 @@ public class TreatBehavior : MonoBehaviour
 
                 Destroy(other.gameObject);
                 Destroy(gameObject);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>().updateScore(treatType);
             }
         }
     }
+    
 }
 
 

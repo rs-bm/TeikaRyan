@@ -1,22 +1,34 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerBehavior : MonoBehaviour
 {
     public float speed; // amt of pixels moved per frame
-    private GameObject currentTreat;
     public float yOff = -1f;
     public GameObject[] treats;
     public int move;
+    public int[] points;
+    public TMP_Text textField;
+    public int total;
     private float timeStart;
+    private GameObject currentTreat;
+    private GameObject nextTreat;
+    private int currentTreatType;
+    private int nextTreatType;
+    private float currentTreatScale;
+    private float nextTreatScale;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        total = 0;
         // float currentTime = Time.time;
         // print(currentTime);
         move = 0;
         timeStart = 0.0f;
+        nextTreatType = Random.Range(0, treats.Length / 2);
+        nextTreatScale = UnityEngine.Random.Range(0.67f, 1.33f);
     }
 
     // Update is called once per frame
@@ -32,10 +44,16 @@ public class PlayerBehavior : MonoBehaviour
             currentTreat.transform.position = playerPos + treatPos;
         } else
         {
-            int result = Random.Range(0, treats.Length / 2);
-            currentTreat = Instantiate(treats[result], new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
-            float randomScale = UnityEngine.Random.Range(0.5f, 1.5f);
-            currentTreat.transform.localScale = new Vector3(randomScale, randomScale, 1);
+            // randomize treat type and scale
+            currentTreatType = nextTreatType;
+            nextTreatType = Random.Range(0, treats.Length / 2);
+            currentTreatScale = nextTreatScale;
+            nextTreatScale = UnityEngine.Random.Range(0.67f, 1.33f);
+            print("Current: " + currentTreatType + " Next: " + nextTreatType);
+            currentTreat = Instantiate(treats[currentTreatType], new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
+            currentTreat.transform.localScale = new Vector3(currentTreatScale, currentTreatScale, 1);
+            nextTreat = Instantiate(treats[nextTreatType], new Vector3(7.5f, 0.75f, 0.0f), Quaternion.identity);
+            nextTreat.transform.localScale = new Vector3(nextTreatScale, nextTreatScale, 1);
         }
 
         if (currentTime - timeStart > 0.25 && Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -48,6 +66,7 @@ public class PlayerBehavior : MonoBehaviour
     
             col.enabled = true;
             currentTreat = null;
+            Destroy(nextTreat);
         }
 
         Keyboard k = Keyboard.current;
@@ -86,5 +105,10 @@ public class PlayerBehavior : MonoBehaviour
     {
         print("you stopped touching " + other.gameObject.name);
         move = 0;
+    }
+    public void updateScore(int index)
+    {
+        total += points[index];
+        textField.SetText("Points: " + total);
     }
 }
