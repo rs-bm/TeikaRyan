@@ -4,11 +4,13 @@ public class TreatBehavior : MonoBehaviour
 {
     public GameObject[] treats;
     public int treatType;
+    public AudioSource mergeSource;
 
     void Start()
     {
         // get the sequence of available treats from PlayerBehavior
         treats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>().treats;
+        mergeSource = GameObject.FindGameObjectWithTag("Player").GetComponents<AudioSource>()[0];
     }
     
     void Update()
@@ -29,6 +31,7 @@ public class TreatBehavior : MonoBehaviour
                 currentTreat.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
                 // sound is cut off by Destroy(gameObject)
                 GetComponent<AudioSource>().Play();
+                mergeSource.Play();
                 Destroy(other.gameObject);
                 Destroy(gameObject);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>().updateScore(treatType);

@@ -18,6 +18,7 @@ public class PlayerBehavior : MonoBehaviour
     private int nextTreatType;
     private float currentTreatScale;
     private float nextTreatScale;
+    private AudioSource dropSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +30,7 @@ public class PlayerBehavior : MonoBehaviour
         timeStart = 0.0f;
         nextTreatType = Random.Range(0, treats.Length / 2);
         nextTreatScale = UnityEngine.Random.Range(0.67f, 1.33f);
+        dropSource = GetComponents<AudioSource>()[1];
     }
 
     // Update is called once per frame
@@ -67,6 +69,7 @@ public class PlayerBehavior : MonoBehaviour
             col.enabled = true;
             currentTreat = null;
             Destroy(nextTreat);
+            dropSource.Play();
         }
 
         Keyboard k = Keyboard.current;
