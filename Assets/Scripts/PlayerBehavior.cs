@@ -13,11 +13,8 @@ public class PlayerBehavior : MonoBehaviour
     public int total;
     private float timeStart;
     private GameObject currentTreat;
-    private GameObject nextTreat;
     private int currentTreatType;
-    private int nextTreatType;
     private float currentTreatScale;
-    private float nextTreatScale;
     private AudioSource dropSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,8 +25,6 @@ public class PlayerBehavior : MonoBehaviour
         // print(currentTime);
         move = 0;
         timeStart = 0.0f;
-        nextTreatType = Random.Range(0, treats.Length / 2);
-        nextTreatScale = UnityEngine.Random.Range(0.67f, 1.33f);
         dropSource = GetComponents<AudioSource>()[1];
     }
 
@@ -39,23 +34,18 @@ public class PlayerBehavior : MonoBehaviour
         float currentTime = Time.time;
 
         if (currentTreat != null) {
-            // current player position
-            // gameObject is the owner of this script
+            // move treat with player
             Vector3 playerPos = transform.position;
             Vector3 treatPos = new Vector3(0.0f, yOff, 0.0f);
             currentTreat.transform.position = playerPos + treatPos;
         } else
         {
-            // randomize treat type and scale
-            currentTreatType = nextTreatType;
-            nextTreatType = Random.Range(0, treats.Length / 2);
-            currentTreatScale = nextTreatScale;
-            nextTreatScale = UnityEngine.Random.Range(0.67f, 1.33f);
-            print("Current: " + currentTreatType + " Next: " + nextTreatType);
+            // generate new treat
+
+            currentTreatType = GameObject.FindGameObjectWithTag("Queue").GetComponent<QueueManager>().updateQueue();
+            currentTreatScale = UnityEngine.Random.Range(0.67f, 1.33f);
             currentTreat = Instantiate(treats[currentTreatType], new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
             currentTreat.transform.localScale = new Vector3(currentTreatScale, currentTreatScale, 1);
-            nextTreat = Instantiate(treats[nextTreatType], new Vector3(6.5f, 1.5f, 0.0f), Quaternion.identity);
-            nextTreat.transform.localScale = new Vector3(nextTreatScale, nextTreatScale, 1);
         }
 
         if (currentTime - timeStart > 0.25 && Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -68,7 +58,6 @@ public class PlayerBehavior : MonoBehaviour
     
             col.enabled = true;
             currentTreat = null;
-            Destroy(nextTreat);
             dropSource.Play();
         }
 
