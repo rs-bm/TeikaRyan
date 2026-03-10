@@ -16,6 +16,7 @@ public class PlayerBehavior : MonoBehaviour
     private int currentTreatType;
     private float currentTreatScale;
     private AudioSource dropSource;
+    private QueueManager queue;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +27,7 @@ public class PlayerBehavior : MonoBehaviour
         move = 0;
         timeStart = 0.0f;
         dropSource = GetComponents<AudioSource>()[1];
+        queue = GameObject.FindGameObjectWithTag("Queue").GetComponent<QueueManager>();
     }
 
     // Update is called once per frame
@@ -41,8 +43,7 @@ public class PlayerBehavior : MonoBehaviour
         } else
         {
             // generate new treat
-
-            currentTreatType = GameObject.FindGameObjectWithTag("Queue").GetComponent<QueueManager>().updateQueue();
+            currentTreatType = queue.updateQueue();
             currentTreatScale = UnityEngine.Random.Range(0.67f, 1.33f);
             currentTreat = Instantiate(treats[currentTreatType], new Vector3(0.0f, yOff, 0.0f), Quaternion.identity);
             currentTreat.transform.localScale = new Vector3(currentTreatScale, currentTreatScale, 1);

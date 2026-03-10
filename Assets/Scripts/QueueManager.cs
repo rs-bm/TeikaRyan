@@ -6,13 +6,13 @@ public class QueueManager : MonoBehaviour
     public Sprite[] UISprites;
     public int[] queue;
     private SpriteRenderer[] childRenderers;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int maxTreadId = 3;
     void Start()
     {
         queue = new int[4];
         for (int i = 0; i < 4; i++)
         {
-            queue[i] = Random.Range(0, 4);
+            queue[i] = Random.Range(0, maxTreadId);
         }
         childRenderers = new SpriteRenderer[4];
         for (int i = 0; i < 4; i++)
@@ -35,7 +35,7 @@ public class QueueManager : MonoBehaviour
         {
             queue[i] = queue[i + 1];
         }
-        queue[3] = Random.Range(0, 4);
+        queue[3] = Random.Range(0, maxTreadId);
         return currentType;
     }
 }
