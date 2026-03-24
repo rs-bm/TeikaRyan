@@ -24,8 +24,8 @@ public class BackgroundManager : MonoBehaviour
     void Update() {
         for (int i = 0; i < 3; i++)
         {
-            float xPos = bcks[i].transform.position.x + speed;
-            float yPos = bcks[i].transform.position.y + speed;
+            float xPos = bcks[i].transform.position.x + speed * Time.deltaTime;
+            float yPos = bcks[i].transform.position.y + speed * Time.deltaTime;
             Vector3 position = new Vector3(xPos, yPos, 10);
             if (bcks[i].transform.position.x > -pivotPoint/2)
             {
