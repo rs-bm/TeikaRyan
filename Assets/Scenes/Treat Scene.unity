@@ -1927,7 +1927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca93b3ce6528142b9a4854355a784fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehavior
-  speed: 0.01
+  speed: 0.1
   yOff: -0.6
   treats:
   - {fileID: 3302306314995966198, guid: e854dabe9d5344c10ba6d6793197a2f3, type: 3}
